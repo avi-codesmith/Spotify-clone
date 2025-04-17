@@ -1,0 +1,14 @@
+.left-container {
+  width: 25vw;
+}
+
+.right-container {
+  width: 75vw;
+}
+
+.home-wrapper ul li {
+  display: flex;
+  gap: 1.5rem;
+  width: 1.5rem;
+  list-style-type: none;
+}
