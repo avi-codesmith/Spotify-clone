@@ -48,6 +48,7 @@
   display: flex;
   width: 75vw;
   align-items: flex-start;
+  flex-direction: column;
 }
 
 .header {
@@ -60,4 +61,72 @@
 
 .header * {
   padding: 1rem;
+}
+
+.spotify-playlist {
+  padding: 2.4rem;
+}
+
+.card-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  flex-wrap: wrap;
+  margin-top: 3.2rem;
+  gap: 1.4rem;
+}
+
+.card-container {
+  width: 20rem;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  background-color: #2e2e2e;
+  position: relative;
+}
+
+.card-container img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-container * {
+  padding-top: 1rem;
+}
+
+.card-container h2 {
+  font-size: 1.8rem;
+}
+
+.card-container p {
+  font-size: 1.4rem;
+  color: #999;
+}
+
+.play {
+  width: 4.2rem;
+  height: 4.2rem;
+  background-color: #1ed760;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 0;
+  position: absolute;
+  top: 52%;
+  right: 8%;
+  transition: all 0.1s ease;
+  transform: translateY(1rem);
+  opacity: 0;
+  cursor: pointer;
+}
+
+.play img {
+  height: 1.8rem;
+  width: 1.8rem;
+  padding: 0;
+}
+
+.card-container:hover .play {
+  transform: translateY(0);
+  opacity: 1;
 }

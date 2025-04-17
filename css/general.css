@@ -33,7 +33,7 @@ body {
   align-items: center;
 }
 
-img {
+.img {
   filter: invert(1);
 }
 
