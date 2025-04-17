@@ -1,5 +1,6 @@
 .left-container {
   width: 25vw;
+  padding: 1rem;
 }
 
 .right-container {
@@ -8,7 +9,23 @@
 
 .home-wrapper ul li {
   display: flex;
+  align-items: center;
   gap: 1.5rem;
   width: 1.5rem;
   list-style-type: none;
+  padding-top: 1.4rem;
+  font-weight: 500;
+  font-size: 1.4rem;
+}
+
+.home-wrapper ul li img {
+  height: 2.4rem;
+  width: 2.4rem;
+}
+
+.heading h2 {
+  font-size: 1.8rem;
+}
+
+.footer {
 }

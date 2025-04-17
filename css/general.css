@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Roboto";
 }
 
 html {
@@ -23,4 +26,30 @@ html {
 
 .align {
   align-items: center;
+}
+
+img {
+  filter: invert(1);
+}
+
+.bg-black {
+  background-color: black;
+  color: #fff;
+}
+
+.bg-grey {
+  background-color: #1f1f1f;
+  color: #fff;
+}
+
+.rounded {
+  border-radius: 0.7rem;
+}
+
+.m-1 {
+  margin: 0.5rem;
+}
+
+.p-1 {
+  padding: 1rem;
 }
