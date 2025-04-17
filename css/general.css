@@ -11,6 +11,11 @@ html {
   font-size: 62.5%;
 }
 
+body {
+  background-color: black;
+  color: #fff;
+}
+
 .border {
   border: 2px solid red;
   margin: 3px;
@@ -51,5 +56,5 @@ img {
 }
 
 .p-1 {
-  padding: 1rem;
+  padding: 1.5rem;
 }
