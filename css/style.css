@@ -57,6 +57,7 @@
   align-items: center;
   width: 100%;
   background-color: #292929;
+  border-radius: 0.7rem 0.7rem 0 0;
 }
 
 .header * {
@@ -77,11 +78,16 @@
 }
 
 .card-container {
-  width: 20rem;
+  width: 25rem;
   padding: 1rem;
   border-radius: 0.6rem;
   background-color: #2e2e2e;
+  transition: all 0.1s ease;
   position: relative;
+}
+
+.card-container:hover {
+  background-color: #3e3e3e;
 }
 
 .card-container img {
@@ -100,11 +106,12 @@
 .card-container p {
   font-size: 1.4rem;
   color: #999;
+  margin-bottom: 1.2rem;
 }
 
 .play {
-  width: 4.2rem;
-  height: 4.2rem;
+  width: 5.2rem;
+  height: 5.2rem;
   background-color: #1ed760;
   display: flex;
   align-items: center;
@@ -112,21 +119,21 @@
   border-radius: 50%;
   padding: 0;
   position: absolute;
-  top: 52%;
+  top: 55%;
   right: 8%;
-  transition: all 0.1s ease;
-  transform: translateY(1rem);
+  transition: all 0.2s ease;
+  transform: translateY(1.5rem) scale(0);
   opacity: 0;
   cursor: pointer;
 }
 
 .play img {
-  height: 1.8rem;
-  width: 1.8rem;
+  height: 2.2rem;
+  width: 2.2rem;
   padding: 0;
 }
 
 .card-container:hover .play {
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
   opacity: 1;
 }
