@@ -29,7 +29,7 @@
           <div class="heading">
             <h2>Your Library</h2>
           </div>
-          <div class="footer">
+          <div class="footer p-1">
             <div>
               <a href="https://www.spotify.com/in-en/legal/">
                 <span>Legal</span>
@@ -60,18 +60,29 @@
                 <span>Accessibility</span>
               </a>
             </div>
+            <div>
+              <span
+                >Copyright &copy; 2025 &lt;/&gt; by
+                <a
+                  style="color: #ddd"
+                  href="https://github.com/avi-codesmith"
+                  target="_blank"
+                  >@avi-codesmith</a
+                >
+              </span>
+            </div>
           </div>
         </div>
       </div>
-      <div class="right-container bg-grey rounded">
+      <div class="right-container rounded">
         <div class="header">
           <div class="nav">
-            <img class="img" src="images/chevron.svg" />
-            <img class="img" src="images/chevronR.svg" />
+            <img src="images/chevron.svg" />
+            <img src="images/chevronR.svg" />
           </div>
           <div class="btn-wrapper">
-            <button>Sign up</button>
-            <button>Log in</button>
+            <button class="sign-up-btn">Sign up</button>
+            <button class="log-in-btn">Log in</button>
           </div>
         </div>
         <div class="spotify-playlist">
@@ -97,19 +108,19 @@
               <h2>Happy Hits!</h2>
               <p>Hits to boost your mood and fill you with happiness!</p>
             </div>
-            <div class="card-container">
-              <div class="play">
-                <img src="images/play.svg" alt="Play btn" />
-              </div>
-              <img
-                src="https://i.scdn.co/image/ab67706f0000000249a1ed33d2ca64e6a5d0e550"
-              />
-              <h2>Happy Hits!</h2>
-              <p>Hits to boost your mood and fill you with happiness!</p>
-            </div>
           </div>
+        </div>
+        <div class="playbar">
+          <div class="song-info"></div>
+          <div class="buttons">
+            <img src="images/previous.svg" alt="previous" title="previous" />
+            <img src="images/play.svg" alt="pause/play" title="play" />
+            <img src="images/next.svg" alt="next" title="next" />
+          </div>
+          <div class="song-time"></div>
         </div>
       </div>
     </div>
   </body>
+  <script src="js/script.js" defer></script>
 </html>

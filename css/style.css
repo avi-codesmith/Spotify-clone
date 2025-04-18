@@ -1,5 +1,7 @@
 .container {
   gap: 1.2rem;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .left-container {
@@ -30,18 +32,28 @@
 }
 
 .library-wrapper {
-  min-height: 80vh;
+  height: 85vh;
+  position: relative;
 }
 
 .footer {
   display: flex;
+  flex-wrap: wrap;
   gap: 1.3rem;
+  position: absolute;
+  bottom: 3%;
 }
 
-.footer a {
+.footer a,
+span {
   font-size: 1.2rem;
   color: #808080;
   text-decoration: none;
+  line-height: 1.5;
+}
+
+.footer a:hover {
+  text-decoration: underline;
 }
 
 .right-container {
@@ -49,6 +61,7 @@
   width: 75vw;
   align-items: flex-start;
   flex-direction: column;
+  position: relative;
 }
 
 .header {
@@ -64,6 +77,47 @@
   padding: 1rem;
 }
 
+.nav img {
+  cursor: pointer;
+  background-color: transparent;
+  margin-right: 1.4rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.nav img:hover {
+  background-color: #333;
+}
+
+.log-in-btn {
+  background-color: #fff;
+  color: #333;
+  font-size: 1.6rem;
+  font-weight: 700;
+  padding: 1.4rem 2.6rem;
+  border-radius: 2.4rem;
+  margin-left: 1rem;
+}
+
+.log-in-btn:hover {
+  background-color: #ddd;
+}
+
+.sign-up-btn {
+  background-color: transparent;
+  border: none;
+  color: #999;
+  font-size: 1.6rem;
+  font-weight: 700;
+  padding: 1.4rem 2.6rem;
+  border-radius: 2.4rem;
+}
+
+.sign-up-btn:hover {
+  background-color: #333;
+  color: #fff;
+}
+
 .spotify-playlist {
   padding: 2.4rem;
 }
@@ -75,24 +129,36 @@
   flex-wrap: wrap;
   margin-top: 3.2rem;
   gap: 1.4rem;
+  max-height: 70vh;
+  overflow-y: scroll;
+}
+
+.card-wrapper::-webkit-scrollbar {
+  width: 15px;
+}
+
+.card-wrapper::-webkit-scrollbar-thumb {
+  background-color: #2e2e2e;
 }
 
 .card-container {
   width: 25rem;
   padding: 1rem;
   border-radius: 0.6rem;
-  background-color: #2e2e2e;
   transition: all 0.1s ease;
   position: relative;
+  cursor: pointer;
 }
 
 .card-container:hover {
-  background-color: #3e3e3e;
+  background-color: #1e1e1e;
 }
 
 .card-container img {
   width: 100%;
   object-fit: cover;
+  border-radius: 1rem;
+  padding: 0;
 }
 
 .card-container * {
@@ -112,14 +178,14 @@
 .play {
   width: 5.2rem;
   height: 5.2rem;
-  background-color: #1ed760;
+  background-color: #10db57;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   padding: 0;
   position: absolute;
-  top: 55%;
+  top: 53%;
   right: 8%;
   transition: all 0.2s ease;
   transform: translateY(1.5rem) scale(0);
@@ -136,4 +202,12 @@
 .card-container:hover .play {
   transform: translateY(0) scale(1);
   opacity: 1;
+}
+
+.playbar {
+  background-color: red;
+  width: 100%;
+  position: absolute;
+  bottom: 0%;
+  padding: 1.2rem;
 }
