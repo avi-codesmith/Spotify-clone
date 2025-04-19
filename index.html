@@ -11,12 +11,15 @@
   </head>
   <body>
     <div class="container flex bg-black p-1">
+      <div class="loader">
+        <img src="logo.gif" alt="Animated logo" />
+      </div>
       <div class="left-container">
         <div class="home-wrapper bg-grey rounded p-1">
           <div class="main-logo">
-            <img class="img" alt="Spotify logo" src="images/logo.svg" />
+            <img class="img icon" alt="Spotify logo" src="images/logo.svg" />
           </div>
-          <ul class="m-1">
+          <ul>
             <li>
               <img class="img" alt="home-icon" src="images/home-icon.svg" />Home
             </li>
@@ -29,7 +32,7 @@
           <div class="heading">
             <h2>Your Library</h2>
             <div class="song-list">
-              <ul></ul>
+              <ul class="p-1 songs"></ul>
             </div>
           </div>
           <div class="footer p-1">
@@ -116,11 +119,24 @@
         <div class="playbar">
           <div class="song-info"></div>
           <div class="buttons">
-            <img src="images/previous.svg" alt="previous" title="previous" />
-            <img src="images/play.svg" alt="pause/play" title="play" />
-            <img src="images/next.svg" alt="next" title="next" />
+            <img
+              class="img"
+              src="images/previous.svg"
+              alt="previous"
+              title="previous"
+            />
+            <img
+              class="img big play-btn"
+              src="images/play.svg"
+              alt="pause/play"
+              title="play"
+            />
+            <img class="img" src="images/next.svg" alt="next" title="next" />
           </div>
           <div class="song-time"></div>
+          <div class="range-bar m-1">
+            <input class="range" type="range" value="0" />
+          </div>
         </div>
       </div>
     </div>
