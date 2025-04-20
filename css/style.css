@@ -38,6 +38,7 @@ html {
   align-items: center;
   gap: 1rem;
   margin-left: 1rem;
+  transition: transform 0.5s ease-in-out;
 }
 
 .home-wrapper {
@@ -68,15 +69,28 @@ html {
   width: 2.4rem;
 }
 
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .heading h2 {
   font-size: 1.8rem;
 }
 
+.library-wrapper div p {
+  font-size: 3.2rem;
+  display: none;
+}
+
 .library-wrapper {
   height: 85vh;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  transition: transform 0.5s ease-in-out;
 }
 
 .home-wrapper ul {
@@ -420,9 +434,6 @@ li .song-name {
 .arrow-wrapper img {
   height: 100%;
   width: 100%;
-  position: absolute;
-  top: -12%;
-  right: -4%;
 }
 
 .left {
@@ -461,4 +472,12 @@ li .song-name {
   font-size: 1.6rem;
   font-weight: 500;
   color: #ddd;
+}
+
+.hambar-wrapper {
+  display: none;
+}
+
+.default-hidden {
+  display: none;
 }

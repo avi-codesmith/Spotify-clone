@@ -58,19 +58,12 @@
     font-size: 40%;
   }
   .nav {
-    display: none;
+    display: none !important;
   }
   .home-wrapper {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-  }
-  .home-wrapper ul {
-    flex-direction: row;
-    margin-left: 1rem;
-    position: absolute;
-    left: 28%;
-    z-index: 9;
+    justify-content: space-between;
   }
   .header {
     padding: 0.7em;
@@ -85,5 +78,48 @@
   }
   .home-wrapper ul li span {
     display: none;
+  }
+  .hambar-wrapper {
+    display: flex;
+  }
+  div a span {
+    display: block;
+  }
+  .song-list ul {
+    max-height: 60vh;
+  }
+  .song-list ul li .play-now {
+    display: flex;
+  }
+  .library-wrapper div p {
+    display: flex !important;
+  }
+  .header {
+    justify-content: space-between;
+  }
+  .right-container {
+    display: flex;
+    width: 100vw;
+    margin-left: 1rem;
+  }
+  .left-container {
+    background-color: #151515;
+    position: absolute;
+    top: 0;
+    transform: translateX(-200%);
+    z-index: 99;
+    width: 80vw;
+    height: 100vh;
+    justify-content: center;
+    margin: 0;
+  }
+  .home-wrapper ul {
+    flex-direction: row;
+  }
+  .song-list ul li {
+    justify-content: space-between;
+  }
+  .default-hidden {
+    display: flex;
   }
 }

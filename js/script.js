@@ -14,7 +14,9 @@ const playBtn = document.querySelector(".play-btn");
 const playbar = document.querySelector(".playbar");
 const loader = document.querySelector(".loader");
 const logo = document.querySelector(".icon");
-
+const hamIcon = document.querySelector(".hambar-wrapper");
+const remove = document.querySelector(".remove");
+const move = document.querySelector(".left-container");
 const rangeBar = document.querySelector(".range");
 
 const songLi = document.querySelector(".song-list").getElementsByTagName("li");
@@ -194,5 +196,14 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+const show = () => {
+  move.style.transform = "translateX(0)";
+};
+const removeNav = () => {
+  move.style.transform = "translateX(-200%)";
+};
+
+remove.addEventListener("click", removeNav);
+hamIcon.addEventListener("click", show);
 window.addEventListener("load", loading);
 logo.addEventListener("click", reload);
