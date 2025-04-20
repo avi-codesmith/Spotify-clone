@@ -61,7 +61,7 @@ const main = async function () {
   const songLi = document.querySelectorAll(".song-list li");
   songLi.forEach((li, index) => {
     li.addEventListener("click", () => {
-      playbar.style.bottom = "0";
+      playbar.style.bottom = "0%";
       playBtn.focus();
 
       const currentImg = li.querySelector(".play-now img");

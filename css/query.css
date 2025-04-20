@@ -1,0 +1,89 @@
+@media (max-width: 1440px) {
+  .play-now span {
+    display: none;
+  }
+  .play-now img {
+    height: 1.8rem;
+    width: 1.8rem;
+  }
+  .play-now {
+    padding: 1.2rem;
+    border-radius: 50%;
+  }
+  li .song-name {
+    width: 8rem;
+  }
+  .song-list ul li {
+    padding: 1.2rem;
+    gap: 1.2rem;
+  }
+  .artist {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 10rem;
+  }
+  div a span {
+    display: none;
+  }
+  .song-list ul {
+    max-height: 50vh;
+  }
+  .footer {
+    padding: 0 !important;
+  }
+  .card-container {
+    width: 23rem;
+  }
+}
+
+@media (max-width: 1124px) {
+  html {
+    font-size: 50%;
+  }
+  .song-list ul li .play-now {
+    display: none;
+  }
+  .song-list ul li {
+    justify-content: center;
+    gap: 3.2rem;
+  }
+  .card-container {
+    width: 21rem;
+  }
+}
+
+@media (max-width: 850px) {
+  html {
+    font-size: 40%;
+  }
+  .nav {
+    display: none;
+  }
+  .home-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .home-wrapper ul {
+    flex-direction: row;
+    margin-left: 1rem;
+    position: absolute;
+    left: 28%;
+    z-index: 9;
+  }
+  .header {
+    padding: 0.7em;
+    border-radius: 0.7rem;
+    justify-content: flex-end;
+  }
+  .card-container {
+    width: 20rem;
+  }
+  .playbar {
+    border-radius: 0.7rem;
+  }
+  .home-wrapper ul li span {
+    display: none;
+  }
+}
