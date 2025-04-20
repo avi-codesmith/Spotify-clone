@@ -12,7 +12,8 @@
     .text{
       font-size: 16px;
       padding-top:12px;
-      fill: #fff;    
+      fill: #fff; 
+      font-family: Arial, sans-serif;   
     }
 
     .arrow:nth-child(1) {

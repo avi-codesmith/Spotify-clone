@@ -5,8 +5,9 @@ const songUl = document
   .querySelector(".song-list")
   .getElementsByTagName("ul")[0];
 
-const songInfo = document.querySelector("song-info");
-const songTime = document.querySelector("song-time");
+let lastPlayedLi = null;
+const songInfo = document.querySelector(".song-info");
+const songTime = document.querySelector(".song-time");
 const right = document.querySelector(".right");
 const left = document.querySelector(".left");
 const playBtn = document.querySelector(".play-btn");
@@ -52,7 +53,7 @@ const main = async function () {
         </div>
         <div class="play-now">
           <span>Play Now</span>
-          <img class="img" src="images/play.svg" alt="play now" />
+          <img src="images/play.svg" alt="play now" />
         </div>
       </li>`;
   }
@@ -62,8 +63,39 @@ const main = async function () {
     li.addEventListener("click", () => {
       playbar.style.bottom = "0";
       playBtn.focus();
+
+      const currentImg = li.querySelector(".play-now img");
+      const currentText = li.querySelector(".play-now span");
+
+      if (currentImg && currentText) {
+        currentImg.src = "images/audio.svg";
+        currentText.textContent = "Playing...";
+      }
+
+      if (lastPlayedLi && lastPlayedLi !== li) {
+        console.log(lastPlayedLi);
+
+        const prevImg = lastPlayedLi.querySelector(".play-now img");
+        const prevText = lastPlayedLi.querySelector(".play-now span");
+
+        if (prevImg && prevText) {
+          prevImg.src = "images/play.svg";
+          prevText.textContent = "Play Now";
+        }
+      }
+
+      lastPlayedLi = li;
       audio.src = `song/${songs[index]}`;
       audio.play();
+      songInfo.innerHTML = `<img src="images/audio.svg" alt="playing..."/><p>${songs[
+        index
+      ]
+        .replaceAll("%20", " ")
+        .replaceAll(".mp3", "")
+        .replaceAll(/\d+/g, "")
+        .replaceAll("()", "")
+        .replace(/-$/, "")
+        .replaceAll(/\b\w/g, (first) => first.toUpperCase())}...</p>`;
 
       if (audio.played) {
         playBtn.src = "images/pause.svg";
@@ -83,6 +115,29 @@ const main = async function () {
 
       audio.addEventListener("loadedmetadata", () => {
         rangeBar.max = audio.duration;
+
+        audio.addEventListener("timeupdate", () => {
+          updateTime();
+        });
+
+        function updateTime() {
+          const minutes = Math.floor(audio.duration / 60)
+            .toString()
+            .padStart(2, "0");
+          const seconds = Math.floor(audio.duration % 60)
+            .toString()
+            .padStart(2, "0");
+
+          const minutesCur = Math.floor(audio.currentTime / 60)
+            .toString()
+            .padStart(2, "0");
+          const secondsCur = Math.floor(audio.currentTime % 60)
+            .toString()
+            .padStart(2, "0");
+
+          songTime.innerHTML = `<span>${minutes} : ${seconds}</span> /
+          <span>${minutesCur} : ${secondsCur}</span>`;
+        }
       });
     });
   });
@@ -102,7 +157,8 @@ const playPause = () => {
 
 const loading = () => {
   setTimeout(() => {
-    loader.style.display = "none";
+    loader.style.zIndex = "-1";
+    loader.style.opacity = "0";
   }, 1000);
 };
 

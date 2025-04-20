@@ -13,7 +13,8 @@
       font-size: 16px;
       padding-top:12px;
       fill: #fff; 
-      font-wieght="700";   
+      font-wieght="700";  
+      font-family: Arial, sans-serif;    
     }
 
     .arrow:nth-child(1) {
