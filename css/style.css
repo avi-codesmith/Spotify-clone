@@ -448,3 +448,9 @@ li .song-name {
   width: 20%;
   margin-right: 2px;
 }
+
+.song-time span {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #ddd;
+}

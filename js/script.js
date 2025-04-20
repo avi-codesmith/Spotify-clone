@@ -107,7 +107,7 @@ const main = async function () {
           audio.currentTime = 0;
           playBtn.src = "images/play.svg";
         }
-      }, 100);
+      }, 1000);
 
       rangeBar.addEventListener("input", () => {
         audio.currentTime = rangeBar.value;
@@ -135,7 +135,7 @@ const main = async function () {
             .toString()
             .padStart(2, "0");
 
-          songTime.innerHTML = `<span>${minutes} : ${seconds}</span> /
+          songTime.innerHTML = `<span>${minutes} : ${seconds}</span> <span> / <span>
           <span>${minutesCur} : ${secondsCur}</span>`;
         }
       });
