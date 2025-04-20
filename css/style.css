@@ -434,6 +434,8 @@ li .song-name {
 .arrow-wrapper img {
   height: 100%;
   width: 100%;
+  position: absolute;
+  bottom: 10%;
 }
 
 .left {

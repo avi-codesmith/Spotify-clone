@@ -123,13 +123,17 @@ const main = async function () {
         });
 
         function updateTime() {
-          const minutes = Math.floor(audio.duration / 60)
-            .toString()
-            .padStart(2, "0");
-          const seconds = Math.floor(audio.duration % 60)
-            .toString()
-            .padStart(2, "0");
+          let minutes = "00";
+          let seconds = "00";
 
+          if (!isNaN(audio.duration)) {
+            minutes = Math.floor(audio.duration / 60)
+              .toString()
+              .padStart(2, "0");
+            seconds = Math.floor(audio.duration % 60)
+              .toString()
+              .padStart(2, "0");
+          }
           const minutesCur = Math.floor(audio.currentTime / 60)
             .toString()
             .padStart(2, "0");
