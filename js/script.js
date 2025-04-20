@@ -5,6 +5,10 @@ const songUl = document
   .querySelector(".song-list")
   .getElementsByTagName("ul")[0];
 
+const songInfo = document.querySelector("song-info");
+const songTime = document.querySelector("song-time");
+const right = document.querySelector(".right");
+const left = document.querySelector(".left");
 const playBtn = document.querySelector(".play-btn");
 const playbar = document.querySelector(".playbar");
 const loader = document.querySelector(".loader");
@@ -57,42 +61,82 @@ const main = async function () {
   songLi.forEach((li, index) => {
     li.addEventListener("click", () => {
       playbar.style.bottom = "0";
+      playBtn.focus();
       audio.src = `song/${songs[index]}`;
       audio.play();
+
       if (audio.played) {
         playBtn.src = "images/pause.svg";
       }
+
       setInterval(() => {
         rangeBar.value = audio.currentTime;
         if (audio.ended) {
-          rangeBar.value = 0;
+          audio.currentTime = 0;
+          playBtn.src = "images/play.svg";
         }
       }, 100);
+
       rangeBar.addEventListener("input", () => {
         audio.currentTime = rangeBar.value;
       });
-    });
-  });
 
-  playBtn.addEventListener("click", () => {
-    if (audio.paused) {
-      audio.play();
-      playBtn.src = "images/pause.svg";
-    } else {
-      audio.pause();
-      playBtn.src = "images/play.svg";
-    }
+      audio.addEventListener("loadedmetadata", () => {
+        rangeBar.max = audio.duration;
+      });
+    });
   });
 };
 
-window.addEventListener("load", () => {
+main();
+
+const playPause = () => {
+  if (audio.paused) {
+    audio.play();
+    playBtn.src = "images/pause.svg";
+  } else {
+    audio.pause();
+    playBtn.src = "images/play.svg";
+  }
+};
+
+const loading = () => {
   setTimeout(() => {
     loader.style.display = "none";
-  }, 1500);
-});
+  }, 1000);
+};
 
-logo.addEventListener("click", () => {
+const reload = () => {
   location.reload();
+};
+
+playBtn.addEventListener("click", playPause);
+document.addEventListener("keypress", (e) => {
+  if (e.code === "Space") {
+    playPause();
+  }
 });
 
-main();
+document.addEventListener("keydown", (e) => {
+  if (audio) {
+    if (e.key === "ArrowRight") {
+      audio.currentTime += 5;
+      right.style.opacity = "1";
+      setTimeout(() => {
+        right.style.opacity = "0";
+      }, 500);
+    } else if (e.key === "ArrowLeft") {
+      audio.currentTime -= 5;
+      left.style.opacity = "1";
+      setTimeout(() => {
+        left.style.opacity = "0";
+      }, 500);
+      if (audio.currentTime <= 0) {
+        audio.currentTime = 0;
+      }
+    }
+  }
+});
+
+window.addEventListener("load", loading);
+logo.addEventListener("click", reload);

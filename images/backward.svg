@@ -1,0 +1,48 @@
+<svg width="80" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .arrow {
+      font-size: 24px;
+      margin:12px;
+      fill: #fff;
+      font-family: Arial, sans-serif;
+      transform-origin: center;
+      animation: pulseMove 0.5s infinite ease-in-out;
+    }
+
+    .text{
+      font-size: 16px;
+      padding-top:12px;
+      fill: #fff;    
+    }
+
+    .arrow:nth-child(1) {
+      animation-delay: 0s;
+    }
+    .arrow:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .arrow:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes pulseMove {
+      0% {
+        opacity: 0.3;
+        transform: translateX(0);
+      }
+      50% {
+        opacity: 1;
+        transform: translateX(5px);
+      }
+      100% {
+        opacity: 0.3;
+        transform: translateX(0);
+      }
+    }
+  </style>
+
+  <text x="10" y="28" class="arrow">◄</text>
+  <text x="40" y="28" class="arrow">◄</text>
+  <text x="70" y="28" class="arrow">◄</text>
+  <text x="20" y="60" class="text">5 seconds</text>
+</svg>
