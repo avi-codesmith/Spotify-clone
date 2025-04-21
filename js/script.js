@@ -6,6 +6,7 @@ const songUl = document
   .getElementsByTagName("ul")[0];
 
 let lastPlayedLi = null;
+const extra = document.querySelector(".extra");
 const songInfo = document.querySelector(".song-info");
 const songTime = document.querySelector(".song-time");
 const right = document.querySelector(".right");
@@ -13,12 +14,11 @@ const left = document.querySelector(".left");
 const playBtn = document.querySelector(".play-btn");
 const playbar = document.querySelector(".playbar");
 const loader = document.querySelector(".loader");
-const logo = document.querySelector(".icon");
+const logo = document.querySelectorAll(".icon");
 const hamIcon = document.querySelector(".hambar-wrapper");
 const remove = document.querySelector(".remove");
 const move = document.querySelector(".left-container");
 const rangeBar = document.querySelector(".range");
-
 const songLi = document.querySelector(".song-list").getElementsByTagName("li");
 const getSongs = async function () {
   const a = await fetch("http://127.0.0.1:5500/song");
@@ -168,9 +168,11 @@ const loading = () => {
   }, 1000);
 };
 
-const reload = () => {
-  location.reload();
-};
+logo.forEach((icon) => {
+  icon.addEventListener("click", () => {
+    location.reload();
+  });
+});
 
 playBtn.addEventListener("click", playPause);
 document.addEventListener("keypress", (e) => {
@@ -202,12 +204,16 @@ document.addEventListener("keydown", (e) => {
 
 const show = () => {
   move.style.transform = "translateX(0)";
+  extra.style.zIndex = "9";
+  extra.style.opacity = "1";
 };
 const removeNav = () => {
   move.style.transform = "translateX(-200%)";
+  extra.style.zIndex = "-99";
+  extra.style.opacity = "0";
 };
 
 remove.addEventListener("click", removeNav);
+extra.addEventListener("click", removeNav);
 hamIcon.addEventListener("click", show);
 window.addEventListener("load", loading);
-logo.addEventListener("click", reload);
