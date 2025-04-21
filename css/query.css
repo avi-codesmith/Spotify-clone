@@ -123,3 +123,40 @@
     display: flex;
   }
 }
+
+@media (max-width: 450px) {
+  html {
+    font-size: 50%;
+  }
+  .card-wrapper {
+    justify-content: center;
+  }
+  .card-wrapper::-webkit-scrollbar {
+    width: 8px;
+  }
+  .card-container {
+    width: 33rem;
+  }
+  .song-time span {
+    font-size: 1.2rem;
+  }
+  .song-time {
+    width: 10rem;
+  }
+  .song-info p {
+    font-size: 1.6rem;
+  }
+  .song-info {
+    width: 10rem;
+  }
+  .song-info img {
+    width: 2rem;
+    height: 3rem;
+  }
+  .upper-playbar {
+    justify-content: space-between;
+  }
+  .playbar {
+    background-color: rgba(21, 21, 21, 0.857);
+  }
+}

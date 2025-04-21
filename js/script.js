@@ -1,11 +1,12 @@
 "use strict";
 
 let audio = new Audio();
-const songUl = document
-  .querySelector(".song-list")
-  .getElementsByTagName("ul")[0];
-
+let songIndex = 0;
 let lastPlayedLi = null;
+
+const songUl = document.querySelector(".song-list ul");
+const previousBtn = document.querySelector(".preBtn");
+const nxtBtn = document.querySelector(".nxtBtn");
 const extra = document.querySelector(".extra");
 const songInfo = document.querySelector(".song-info");
 const songTime = document.querySelector(".song-time");
@@ -19,7 +20,7 @@ const hamIcon = document.querySelector(".hambar-wrapper");
 const remove = document.querySelector(".remove");
 const move = document.querySelector(".left-container");
 const rangeBar = document.querySelector(".range");
-const songLi = document.querySelector(".song-list").getElementsByTagName("li");
+
 const getSongs = async function () {
   const a = await fetch("http://127.0.0.1:5500/song");
   const response = await a.text();
@@ -38,7 +39,6 @@ const getSongs = async function () {
 
 const main = async function () {
   const songs = await getSongs();
-
   for (const song of songs) {
     songUl.innerHTML += `
       <li>
@@ -63,6 +63,7 @@ const main = async function () {
   const songLi = document.querySelectorAll(".song-list li");
   songLi.forEach((li, index) => {
     li.addEventListener("click", () => {
+      songIndex = index;
       playbar.style.bottom = "0%";
       playBtn.focus();
 
@@ -75,8 +76,6 @@ const main = async function () {
       }
 
       if (lastPlayedLi && lastPlayedLi !== li) {
-        console.log(lastPlayedLi);
-
         const prevImg = lastPlayedLi.querySelector(".play-now img");
         const prevText = lastPlayedLi.querySelector(".play-now span");
 
@@ -89,6 +88,7 @@ const main = async function () {
       lastPlayedLi = li;
       audio.src = `song/${songs[index]}`;
       audio.play();
+
       songInfo.innerHTML = `<img src="images/audio.svg" alt="playing..."/><p>${songs[
         index
       ]
@@ -119,10 +119,6 @@ const main = async function () {
         rangeBar.max = audio.duration;
 
         audio.addEventListener("timeupdate", () => {
-          updateTime();
-        });
-
-        function updateTime() {
           let minutes = "00";
           let seconds = "00";
 
@@ -143,9 +139,21 @@ const main = async function () {
 
           songTime.innerHTML = `<span>${minutes} : ${seconds}</span> <span> / <span>
           <span>${minutesCur} : ${secondsCur}</span>`;
-        }
+        });
       });
     });
+  });
+
+  previousBtn.addEventListener("click", () => {
+    songIndex--;
+    if (songIndex < 0) songIndex = 0;
+    songLi[songIndex].click();
+  });
+
+  nxtBtn.addEventListener("click", () => {
+    songIndex++;
+    if (songIndex >= songs.length) songIndex = songs.length - 1;
+    songLi[songIndex].click();
   });
 };
 
@@ -162,10 +170,8 @@ const playPause = () => {
 };
 
 const loading = () => {
-  setTimeout(() => {
-    loader.style.zIndex = "-1";
-    loader.style.opacity = "0";
-  }, 1000);
+  loader.style.zIndex = "-1";
+  loader.style.opacity = "0";
 };
 
 logo.forEach((icon) => {
@@ -186,18 +192,12 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") {
       audio.currentTime += 5;
       right.style.opacity = "1";
-      setTimeout(() => {
-        right.style.opacity = "0";
-      }, 500);
+      setTimeout(() => (right.style.opacity = "0"), 500);
     } else if (e.key === "ArrowLeft") {
       audio.currentTime -= 5;
       left.style.opacity = "1";
-      setTimeout(() => {
-        left.style.opacity = "0";
-      }, 500);
-      if (audio.currentTime <= 0) {
-        audio.currentTime = 0;
-      }
+      setTimeout(() => (left.style.opacity = "0"), 500);
+      if (audio.currentTime <= 0) audio.currentTime = 0;
     }
   }
 });
@@ -207,6 +207,7 @@ const show = () => {
   extra.style.zIndex = "9";
   extra.style.opacity = "1";
 };
+
 const removeNav = () => {
   move.style.transform = "translateX(-200%)";
   extra.style.zIndex = "-99";
