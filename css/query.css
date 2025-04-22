@@ -71,7 +71,13 @@
     justify-content: flex-end;
   }
   .card-container {
-    width: 20rem;
+    width: 34rem;
+  }
+  .card-container h2 {
+    font-size: 2rem;
+  }
+  .card-container p {
+    font-size: 1.8rem;
   }
   .playbar {
     border-radius: 0.7rem;

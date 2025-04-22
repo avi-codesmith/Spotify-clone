@@ -261,6 +261,11 @@ ul li {
   cursor: pointer;
 }
 
+.play:hover {
+  scale: 1.1;
+  background-color: #01ff59;
+}
+
 .play img {
   height: 2.2rem;
   width: 2.2rem;
@@ -383,9 +388,13 @@ li .song-name {
 .range-bar {
   position: relative;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.range-bar input {
+.range {
   -webkit-appearance: none;
   width: 100%;
   height: 0.6rem;
@@ -395,7 +404,7 @@ li .song-name {
   margin: 2rem 0 1.2rem 0;
 }
 
-.range-bar input::-webkit-slider-thumb {
+.range::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 1.8rem;
   width: 1.8rem;
@@ -405,11 +414,11 @@ li .song-name {
   transition: all 0.3s ease;
 }
 
-.range-bar input::-webkit-slider-thumb:hover {
+.range::-webkit-slider-thumb:hover {
   scale: 1.5;
 }
 
-.range-bar input:hover {
+.range:hover {
   background-color: #333;
 }
 
@@ -470,9 +479,9 @@ li .song-name {
 }
 
 .song-time span {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 500;
-  color: #ddd;
+  color: #fff;
 }
 
 .hambar-wrapper {
@@ -493,4 +502,70 @@ li .song-name {
   right: 0;
   opacity: 0;
   z-index: -99;
+}
+
+.sound-btn .sound-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.4rem;
+  width: 2.4rem;
+  background-color: #222;
+  padding: 2.4rem;
+  border-radius: 50%;
+}
+
+.sound-btn .sound-icon img {
+  z-index: 999;
+  cursor: pointer;
+}
+
+.down-playbar {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sound-btn {
+  display: flex;
+  align-items: center;
+  width: 10px;
+  margin-top: 1rem;
+}
+
+.sound-btn .input-sound {
+  background-color: #222;
+  border-radius: 0 6rem 6rem 0;
+  display: none;
+  padding: 2.2rem;
+  transform: translateX(-10%);
+}
+
+.sound-btn:hover .input-sound {
+  display: flex;
+}
+
+.input-sound input[type="range"] {
+  -webkit-appearance: none;
+  width: 20rem;
+  height: 0.4rem;
+  background: #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  outline: none;
+  cursor: pointer;
+  accent-color: #111;
+  margin-left: 2rem;
+}
+
+.input-sound input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.input-sound input[type="range"]::-webkit-slider-thumb {
+  box-shadow: inset 0 0 0 3px #01ff59;
+  border-radius: 50%;
 }
