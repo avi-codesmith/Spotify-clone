@@ -281,9 +281,10 @@ ul li {
   background-color: #151515;
   width: 100%;
   position: absolute;
-  bottom: -20%;
+  bottom: -50%;
   transition: 0.3s ease;
   padding: 1.43rem;
+  padding-bottom: 0;
   border-radius: 0 0 0.7rem 0.7rem;
   display: flex;
   align-items: center;
@@ -292,8 +293,8 @@ ul li {
 }
 
 .upper-playbar {
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: space-around;
   width: 100%;
 }
@@ -401,7 +402,7 @@ li .song-name {
   background-color: #292929;
   border-radius: 4px;
   cursor: pointer;
-  margin: 2rem 0 1.2rem 0;
+  margin-top: 2rem;
 }
 
 .range::-webkit-slider-thumb {
@@ -521,6 +522,7 @@ li .song-name {
 }
 
 .down-playbar {
+  margin-top: 1rem;
   width: 90%;
   display: flex;
   align-items: center;
@@ -531,7 +533,7 @@ li .song-name {
   display: flex;
   align-items: center;
   width: 10px;
-  margin-top: 1rem;
+  scale: 0.8;
 }
 
 .sound-btn .input-sound {
@@ -568,4 +570,22 @@ li .song-name {
 .input-sound input[type="range"]::-webkit-slider-thumb {
   box-shadow: inset 0 0 0 3px #01ff59;
   border-radius: 50%;
+}
+
+.download {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.4rem;
+  width: 2.4rem;
+  background-color: #222;
+  padding: 2.4rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  scale: 0.8;
+}
+
+.download:active {
+  background-color: #191919;
 }
