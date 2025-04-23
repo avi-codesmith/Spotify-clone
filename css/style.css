@@ -88,8 +88,9 @@ html {
   height: 85vh;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-direction: column;
+  position: relative;
 }
 
 .home-wrapper ul {
@@ -111,6 +112,9 @@ ul li {
   flex-wrap: wrap;
   gap: 1.3rem;
   background-color: #151515;
+  position: absolute;
+  bottom: 0;
+  border-radius: 0 0 7rem 0;
 }
 
 .footer a {
@@ -211,6 +215,7 @@ ul li {
 
 .card-container {
   width: 25rem;
+  max-height: 34rem;
   padding: 1rem;
   border-radius: 0.6rem;
   transition: all 0.1s ease;
@@ -241,6 +246,10 @@ ul li {
   font-size: 1.4rem;
   color: #999;
   margin-bottom: 1.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 200px; /* ya jitna bhi chahiye width */
 }
 
 .play {
@@ -588,4 +597,8 @@ li .song-name {
 
 .download:active {
   background-color: #191919;
+}
+
+.card-info {
+  height: 9rem;
 }

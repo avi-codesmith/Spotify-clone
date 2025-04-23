@@ -23,6 +23,7 @@ const move = document.querySelector(".left-container");
 const rangeBar = document.querySelector(".range");
 const soundRange = document.querySelector(".input-sound input");
 const downloadBtn = document.querySelector(".download");
+const cardWrapper = document.querySelector(".card-wrapper");
 let songs = [];
 
 const getSongs = async function (folder) {
@@ -40,132 +41,168 @@ const getSongs = async function (folder) {
   }
 };
 
-document.querySelectorAll(".card-container").forEach((card) => {
-  card.addEventListener("click", async () => {
-    console.log("clicked");
-    songUl.innerHTML = "";
-    songs = [];
-    await getSongs(`song/${card.dataset.folder}`);
+window.addEventListener("load", () => {
+  const targetCard = document.querySelector(
+    '.card-container[data-folder="yoyohoneysingh"]'
+  );
+  if (targetCard) {
+    targetCard.click();
+  }
+});
 
-    for (const song of songs) {
-      songUl.innerHTML += `
-        <li>
-          <img src="images/music.svg" class="img" alt="music-icon" />
-          <div class="info">
-            <div class="song-name">${song
+const displayAlbums = async () => {
+  const a = await fetch(`http://127.0.0.1:5500/song`);
+  const response = await a.text();
+  const div = document.createElement("div");
+  div.innerHTML = response;
+  const anchors = div.getElementsByTagName("a");
+  Array.from(anchors).forEach(async (e) => {
+    if (e.href.includes("/song/")) {
+      const folders = e.href.split("/")[4];
+      const a = await fetch(`http://127.0.0.1:5500/song/${folders}/info.json`);
+      const response = await a.json();
+      cardWrapper.innerHTML += `
+      <div class="card-container" data-folder="${folders}">
+        <div class="play">
+          <img class="img" src="images/play.svg" alt="Play btn" />
+        </div>
+        <img
+          src="https://i.scdn.co/image/ab67706f0000000249a1ed33d2ca64e6a5d0e550"
+        />
+        <div class="card-info">
+          <h2>${response.title}</h2>
+          <p>${response.description}</p>
+        </div>
+      </div>`;
+    }
+
+    document.querySelectorAll(".card-container").forEach((card) => {
+      card.addEventListener("click", async () => {
+        songUl.innerHTML = "";
+        songs = [];
+        await getSongs(`song/${card.dataset.folder}`);
+        for (const song of songs) {
+          songUl.innerHTML += `
+            <li>
+              <img src="images/music.svg" class="img" alt="music-icon" />
+              <div class="info">
+                <div class="song-name">${song
+                  .replaceAll("%20", " ")
+                  .replaceAll(".mp3", "")
+                  .replaceAll(/\d+/g, "")
+                  .replaceAll("()", "")
+                  .replace(/-$/, "")
+                  .replaceAll(/\b\w/g, (first) => first.toUpperCase())}</div>
+                <div class="artist">- Yo Yo Honey Singh</div>
+              </div>
+              <div class="play-now">
+                <span>Play Now</span>
+                <img src="images/play.svg" alt="play now" />
+              </div>
+            </li>`;
+        }
+
+        const songLi = document.querySelectorAll(".song-list li");
+        songLi.forEach((li, index) => {
+          li.addEventListener("click", () => {
+            songIndex = index;
+            playbar.style.bottom = "0%";
+            playBtn.focus();
+
+            const currentImg = li.querySelector(".play-now img");
+            const currentText = li.querySelector(".play-now span");
+
+            if (currentImg && currentText) {
+              currentImg.src = "images/audio.svg";
+              currentText.textContent = "Playing...";
+            }
+
+            if (lastPlayedLi && lastPlayedLi !== li) {
+              const prevImg = lastPlayedLi.querySelector(".play-now img");
+              const prevText = lastPlayedLi.querySelector(".play-now span");
+
+              if (prevImg && prevText) {
+                prevImg.src = "images/play.svg";
+                prevText.textContent = "Play Now";
+              }
+            }
+
+            lastPlayedLi = li;
+            audio.src = `${currfolder}/${songs[index]}`;
+            audio.play();
+
+            songInfo.innerHTML = `<img src="images/audio.svg" alt="playing..."/><p>${songs[
+              index
+            ]
               .replaceAll("%20", " ")
               .replaceAll(".mp3", "")
               .replaceAll(/\d+/g, "")
               .replaceAll("()", "")
               .replace(/-$/, "")
-              .replaceAll(/\b\w/g, (first) => first.toUpperCase())}</div>
-            <div class="artist">- Yo Yo Honey Singh</div>
-          </div>
-          <div class="play-now">
-            <span>Play Now</span>
-            <img src="images/play.svg" alt="play now" />
-          </div>
-        </li>`;
-    }
+              .replaceAll(/\b\w/g, (first) => first.toUpperCase())}...</p>`;
 
-    const songLi = document.querySelectorAll(".song-list li");
-    songLi.forEach((li, index) => {
-      li.addEventListener("click", () => {
-        songIndex = index;
-        playbar.style.bottom = "0%";
-        playBtn.focus();
+            if (audio.played) {
+              playBtn.src = "images/pause.svg";
+            }
 
-        const currentImg = li.querySelector(".play-now img");
-        const currentText = li.querySelector(".play-now span");
+            setInterval(() => {
+              rangeBar.value = audio.currentTime;
+              if (audio.ended) {
+                audio.currentTime = 0;
+                playBtn.src = "images/play.svg";
+              }
+            }, 1000);
 
-        if (currentImg && currentText) {
-          currentImg.src = "images/audio.svg";
-          currentText.textContent = "Playing...";
-        }
+            rangeBar.addEventListener("input", () => {
+              audio.currentTime = rangeBar.value;
+            });
 
-        if (lastPlayedLi && lastPlayedLi !== li) {
-          const prevImg = lastPlayedLi.querySelector(".play-now img");
-          const prevText = lastPlayedLi.querySelector(".play-now span");
+            audio.addEventListener("loadedmetadata", () => {
+              rangeBar.max = audio.duration;
 
-          if (prevImg && prevText) {
-            prevImg.src = "images/play.svg";
-            prevText.textContent = "Play Now";
-          }
-        }
+              audio.addEventListener("timeupdate", () => {
+                let minutes = "00";
+                let seconds = "00";
 
-        lastPlayedLi = li;
-        audio.src = `${currfolder}/${songs[index]}`;
-        audio.play();
+                if (!isNaN(audio.duration)) {
+                  minutes = Math.floor(audio.duration / 60)
+                    .toString()
+                    .padStart(2, "0");
+                  seconds = Math.floor(audio.duration % 60)
+                    .toString()
+                    .padStart(2, "0");
+                }
+                const minutesCur = Math.floor(audio.currentTime / 60)
+                  .toString()
+                  .padStart(2, "0");
+                const secondsCur = Math.floor(audio.currentTime % 60)
+                  .toString()
+                  .padStart(2, "0");
 
-        songInfo.innerHTML = `<img src="images/audio.svg" alt="playing..."/><p>${songs[
-          index
-        ]
-          .replaceAll("%20", " ")
-          .replaceAll(".mp3", "")
-          .replaceAll(/\d+/g, "")
-          .replaceAll("()", "")
-          .replace(/-$/, "")
-          .replaceAll(/\b\w/g, (first) => first.toUpperCase())}...</p>`;
-
-        if (audio.played) {
-          playBtn.src = "images/pause.svg";
-        }
-
-        setInterval(() => {
-          rangeBar.value = audio.currentTime;
-          if (audio.ended) {
-            audio.currentTime = 0;
-            playBtn.src = "images/play.svg";
-          }
-        }, 1000);
-
-        rangeBar.addEventListener("input", () => {
-          audio.currentTime = rangeBar.value;
+                songTime.innerHTML = `<span>${minutes} : ${seconds}</span> <span> / <span>
+                <span>${minutesCur} : ${secondsCur}</span>`;
+              });
+            });
+          });
+        });
+        // Buttons
+        previousBtn.addEventListener("click", () => {
+          songIndex--;
+          if (songIndex < 0) songIndex = 0;
+          songLi[songIndex].click();
         });
 
-        audio.addEventListener("loadedmetadata", () => {
-          rangeBar.max = audio.duration;
-
-          audio.addEventListener("timeupdate", () => {
-            let minutes = "00";
-            let seconds = "00";
-
-            if (!isNaN(audio.duration)) {
-              minutes = Math.floor(audio.duration / 60)
-                .toString()
-                .padStart(2, "0");
-              seconds = Math.floor(audio.duration % 60)
-                .toString()
-                .padStart(2, "0");
-            }
-            const minutesCur = Math.floor(audio.currentTime / 60)
-              .toString()
-              .padStart(2, "0");
-            const secondsCur = Math.floor(audio.currentTime % 60)
-              .toString()
-              .padStart(2, "0");
-
-            songTime.innerHTML = `<span>${minutes} : ${seconds}</span> <span> / <span>
-            <span>${minutesCur} : ${secondsCur}</span>`;
-          });
+        nxtBtn.addEventListener("click", () => {
+          songIndex++;
+          if (songIndex >= songs.length) songIndex = songs.length - 1;
+          songLi[songIndex].click();
         });
       });
     });
-
-    // Buttons
-    previousBtn.addEventListener("click", () => {
-      songIndex--;
-      if (songIndex < 0) songIndex = 0;
-      songLi[songIndex].click();
-    });
-
-    nxtBtn.addEventListener("click", () => {
-      songIndex++;
-      if (songIndex >= songs.length) songIndex = songs.length - 1;
-      songLi[songIndex].click();
-    });
   });
-});
+};
+
+displayAlbums();
 
 const playPause = () => {
   if (audio.paused) {
