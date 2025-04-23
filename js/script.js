@@ -25,6 +25,7 @@ const soundRange = document.querySelector(".input-sound input");
 const downloadBtn = document.querySelector(".download");
 const cardWrapper = document.querySelector(".card-wrapper");
 let songs = [];
+let songLi;
 
 const getSongs = async function (folder) {
   currfolder = folder;
@@ -41,33 +42,26 @@ const getSongs = async function (folder) {
   }
 };
 
-window.addEventListener("load", () => {
-  const targetCard = document.querySelector(
-    '.card-container[data-folder="yoyohoneysingh"]'
-  );
-  if (targetCard) {
-    targetCard.click();
-  }
-});
-
 const displayAlbums = async () => {
   const a = await fetch(`http://127.0.0.1:5500/song`);
   const response = await a.text();
   const div = document.createElement("div");
   div.innerHTML = response;
   const anchors = div.getElementsByTagName("a");
+  console.log(response);
+
   Array.from(anchors).forEach(async (e) => {
     if (e.href.includes("/song/")) {
       const folders = e.href.split("/")[4];
       const a = await fetch(`http://127.0.0.1:5500/song/${folders}/info.json`);
       const response = await a.json();
       cardWrapper.innerHTML += `
-      <div class="card-container" data-folder="${folders}">
+      <div class="card-container" data-folder="${folders}" data-title="${response.title}" data-description="${response.description}">
         <div class="play">
           <img class="img" src="images/play.svg" alt="Play btn" />
         </div>
         <img
-          src="https://i.scdn.co/image/ab67706f0000000249a1ed33d2ca64e6a5d0e550"
+          src="http://127.0.0.1:5500/song/${folders}/cover.jpg" class="cover"
         />
         <div class="card-info">
           <h2>${response.title}</h2>
@@ -81,28 +75,30 @@ const displayAlbums = async () => {
         songUl.innerHTML = "";
         songs = [];
         await getSongs(`song/${card.dataset.folder}`);
+
+        const albumTitle = card.dataset.title;
         for (const song of songs) {
           songUl.innerHTML += `
-            <li>
-              <img src="images/music.svg" class="img" alt="music-icon" />
-              <div class="info">
-                <div class="song-name">${song
-                  .replaceAll("%20", " ")
-                  .replaceAll(".mp3", "")
-                  .replaceAll(/\d+/g, "")
-                  .replaceAll("()", "")
-                  .replace(/-$/, "")
-                  .replaceAll(/\b\w/g, (first) => first.toUpperCase())}</div>
-                <div class="artist">- Yo Yo Honey Singh</div>
-              </div>
-              <div class="play-now">
-                <span>Play Now</span>
-                <img src="images/play.svg" alt="play now" />
-              </div>
-            </li>`;
+    <li title="${albumTitle}">
+      <img src="images/music.svg" class="img" alt="music-icon" />
+      <div class="info">
+        <div class="song-name">${song
+          .replaceAll("%20", " ")
+          .replaceAll(".mp3", "")
+          .replaceAll(/\d+/g, "")
+          .replaceAll("()", "")
+          .replace(/-$/, "")
+          .replaceAll(/\b\w/g, (first) => first.toUpperCase())}</div>
+        <div class="artist">- ${albumTitle}</div>
+      </div>
+      <div class="play-now">
+        <span>Play Now</span>
+        <img src="images/play.svg" alt="play now" />
+      </div>
+    </li>`;
         }
 
-        const songLi = document.querySelectorAll(".song-list li");
+        songLi = document.querySelectorAll(".song-list li");
         songLi.forEach((li, index) => {
           li.addEventListener("click", () => {
             songIndex = index;
@@ -185,24 +181,34 @@ const displayAlbums = async () => {
             });
           });
         });
-        // Buttons
-        previousBtn.addEventListener("click", () => {
-          songIndex--;
-          if (songIndex < 0) songIndex = 0;
-          songLi[songIndex].click();
-        });
-
-        nxtBtn.addEventListener("click", () => {
-          songIndex++;
-          if (songIndex >= songs.length) songIndex = songs.length - 1;
-          songLi[songIndex].click();
-        });
       });
     });
   });
 };
 
 displayAlbums();
+
+// Buttons
+previousBtn.addEventListener("click", () => {
+  songIndex--;
+  if (songIndex < 0) songIndex = 0;
+  songLi[songIndex].click();
+});
+
+nxtBtn.addEventListener("click", () => {
+  songIndex++;
+  if (songIndex >= songs.length) songIndex = songs.length - 1;
+  songLi[songIndex].click();
+});
+
+window.addEventListener("load", () => {
+  const targetCard = document.querySelector(
+    '.card-container[data-folder="badshah"]'
+  );
+  if (targetCard) {
+    targetCard.click();
+  }
+});
 
 const playPause = () => {
   if (audio.paused) {

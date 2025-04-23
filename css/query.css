@@ -51,91 +51,94 @@
   .card-container {
     width: 21rem;
   }
-}
 
-@media (max-width: 850px) {
-  html {
-    font-size: 40%;
-  }
-  .nav {
-    display: none !important;
-  }
-  .home-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .header {
-    padding: 0.7em;
-    border-radius: 0.7rem;
-    justify-content: flex-end;
-  }
-  .card-container {
-    width: 34rem;
-  }
-  .card-container h2 {
-    font-size: 2rem;
-  }
-  .card-container p {
-    font-size: 1.8rem;
-  }
-  .playbar {
-    border-radius: 0.7rem;
-  }
-  .home-wrapper ul li span {
-    display: none;
-  }
-  .hambar-wrapper {
-    display: flex;
-  }
-  div a span {
-    display: block;
-  }
-  .song-list ul {
-    max-height: 60vh;
-  }
-  .song-list ul li .play-now {
-    display: flex;
-  }
-  .library-wrapper div p {
-    display: flex !important;
-  }
-  .header {
-    justify-content: space-between;
-  }
-  .right-container {
-    display: flex;
-    width: 100vw;
-    margin-left: 1rem;
-  }
-  .left-container {
-    background-color: #151515;
-    position: absolute;
-    top: 0;
-    transform: translateX(-200%);
-    z-index: 99;
-    width: 80vw;
-    height: 100vh;
-    justify-content: center;
-    margin: 0;
-  }
-  .home-wrapper ul {
-    flex-direction: row;
-  }
-  .song-list ul li {
-    justify-content: space-between;
-  }
-  .default-hidden {
-    display: flex;
+  @media (max-width: 850px) {
+    html {
+      font-size: 40%;
+    }
+    .nav {
+      display: none !important;
+    }
+    .home-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header {
+      padding: 0.7em;
+      border-radius: 0.7rem;
+      justify-content: flex-end;
+    }
+    .card-container {
+      width: 34rem;
+    }
+    .card-container h2 {
+      font-size: 2rem;
+    }
+    .card-container p {
+      font-size: 1.8rem;
+    }
+    .playbar {
+      border-radius: 0.7rem;
+    }
+    .home-wrapper ul li span {
+      display: none;
+    }
+    .hambar-wrapper {
+      display: flex;
+    }
+    div a span {
+      display: block;
+    }
+    .song-list ul {
+      max-height: 60vh;
+    }
+    .song-list ul li .play-now {
+      display: flex;
+    }
+    .library-wrapper div p {
+      display: flex !important;
+    }
+    .header {
+      justify-content: space-between;
+    }
+    .right-container {
+      display: flex;
+      width: 100vw;
+      margin-left: 1rem;
+    }
+    .left-container {
+      background-color: #151515;
+      position: absolute;
+      top: 0;
+      transform: translateX(-200%);
+      z-index: 99;
+      width: 80vw;
+      height: 100vh;
+      justify-content: center;
+      margin: 0;
+    }
+    .home-wrapper ul {
+      flex-direction: row;
+    }
+    .song-list ul li {
+      justify-content: space-between;
+    }
+    .default-hidden {
+      display: flex;
+    }
+    .card-container img {
+      height: 40rem;
+    }
+    .card-wrapper {
+      justify-content: center;
+    }
   }
 }
 
 @media (max-width: 450px) {
   html {
     font-size: 50%;
-  }
-  .card-wrapper {
-    justify-content: center;
   }
   .card-wrapper::-webkit-scrollbar {
     width: 8px;
