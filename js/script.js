@@ -24,12 +24,13 @@ const rangeBar = document.querySelector(".range");
 const soundRange = document.querySelector(".input-sound input");
 const downloadBtn = document.querySelector(".download");
 const cardWrapper = document.querySelector(".card-wrapper");
+const body = document.querySelector("body");
 let songs = [];
 let songLi;
 
 const getSongs = async function (folder) {
   currfolder = folder;
-  const a = await fetch(`http://127.0.0.1:5500/${currfolder}/`);
+  const a = await fetch(`http://localhost:5502/${currfolder}/`);
   const response = await a.text();
   const div = document.createElement("div");
   div.innerHTML = response;
@@ -43,17 +44,16 @@ const getSongs = async function (folder) {
 };
 
 const displayAlbums = async () => {
-  const a = await fetch(`http://127.0.0.1:5500/song`);
+  const a = await fetch(`http://localhost:5502/song`);
   const response = await a.text();
   const div = document.createElement("div");
   div.innerHTML = response;
   const anchors = div.getElementsByTagName("a");
-  console.log(response);
 
   Array.from(anchors).forEach(async (e) => {
     if (e.href.includes("/song/")) {
       const folders = e.href.split("/")[4];
-      const a = await fetch(`http://127.0.0.1:5500/song/${folders}/info.json`);
+      const a = await fetch(`http://localhost:5502/song/${folders}/info.json`);
       const response = await a.json();
       cardWrapper.innerHTML += `
       <div class="card-container" data-folder="${folders}" data-title="${response.title}" data-description="${response.description}">
@@ -61,7 +61,7 @@ const displayAlbums = async () => {
           <img class="img" src="images/play.svg" alt="Play btn" />
         </div>
         <img
-          src="http://127.0.0.1:5500/song/${folders}/cover.jpg" class="cover"
+          src="http://localhost:5502/song/${folders}/cover.jpg" class="cover"
         />
         <div class="card-info">
           <h2>${response.title}</h2>
@@ -188,7 +188,6 @@ const displayAlbums = async () => {
 
 displayAlbums();
 
-// Buttons
 previousBtn.addEventListener("click", () => {
   songIndex--;
   if (songIndex < 0) songIndex = 0;
@@ -201,14 +200,12 @@ nxtBtn.addEventListener("click", () => {
   songLi[songIndex].click();
 });
 
-window.addEventListener("load", () => {
-  const targetCard = document.querySelector(
-    '.card-container[data-folder="badshah"]'
-  );
+setTimeout(() => {
+  const targetCard = document.querySelector('.card-container[data-folder="c"]');
   if (targetCard) {
     targetCard.click();
   }
-});
+}, 150);
 
 const playPause = () => {
   if (audio.paused) {

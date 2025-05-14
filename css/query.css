@@ -165,7 +165,4 @@
   .upper-playbar {
     justify-content: space-between;
   }
-  .playbar {
-    background-color: rgba(21, 21, 21, 0.857);
-  }
 }
