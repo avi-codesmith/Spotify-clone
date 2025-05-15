@@ -17,7 +17,6 @@ const playBtn = document.querySelector(".play-btn");
 const playbar = document.querySelector(".playbar");
 const loader = document.querySelector(".loader");
 const logo = document.querySelectorAll(".icon");
-const hamIcon = document.querySelector(".hambar-wrapper");
 const remove = document.querySelector(".remove");
 const move = document.querySelector(".left-container");
 const rangeBar = document.querySelector(".range");
@@ -200,12 +199,16 @@ nxtBtn.addEventListener("click", () => {
   songLi[songIndex].click();
 });
 
-setTimeout(() => {
-  const targetCard = document.querySelector('.card-container[data-folder="c"]');
-  if (targetCard) {
-    targetCard.click();
-  }
-}, 150);
+if (window.innerWidth >= 847) {
+  setTimeout(() => {
+    const targetCard = document.querySelector(
+      '.card-container[data-folder="a"]'
+    );
+    if (targetCard) {
+      targetCard.click();
+    }
+  }, 150);
+}
 
 const playPause = () => {
   if (audio.paused) {
@@ -218,8 +221,10 @@ const playPause = () => {
 };
 
 const loading = () => {
-  loader.style.zIndex = "-1";
-  loader.style.opacity = "0";
+  setTimeout(() => {
+    loader.style.zIndex = "-1";
+    loader.style.opacity = "0";
+  }, 100);
 };
 
 logo.forEach((icon) => {
@@ -284,5 +289,14 @@ downloadBtn.addEventListener("click", downloadSong);
 remove.addEventListener("click", removeNav);
 soundRange.addEventListener("input", soundTracker);
 extra.addEventListener("click", removeNav);
-hamIcon.addEventListener("click", show);
+if (window.innerWidth <= 847) {
+  document.querySelectorAll(".card-wrapper").forEach((e) => {
+    e.addEventListener("click", show);
+  });
+
+  document.querySelectorAll(".songs").forEach((e) => {
+    e.addEventListener("click", removeNav);
+  });
+}
+
 window.addEventListener("load", loading);
