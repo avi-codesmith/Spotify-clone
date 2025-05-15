@@ -207,7 +207,7 @@ if (window.innerWidth >= 847) {
     if (targetCard) {
       targetCard.click();
     }
-  }, 150);
+  }, 100);
 }
 
 const playPause = () => {
@@ -224,7 +224,7 @@ const loading = () => {
   setTimeout(() => {
     loader.style.zIndex = "-1";
     loader.style.opacity = "0";
-  }, 100);
+  }, 800);
 };
 
 logo.forEach((icon) => {

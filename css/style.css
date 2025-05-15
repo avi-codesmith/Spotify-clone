@@ -19,7 +19,7 @@ html {
   transition: all 0.3s ease;
   opacity: 1;
   z-index: 999;
-  background-color: rgba(51, 51, 51, 0.927);
+  background-color: #000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,6 +28,19 @@ html {
 .loader img {
   height: 20rem;
   width: 20rem;
+  animation: big 0.8s ease;
+}
+
+@keyframes big {
+  0% {
+    scale: 0.5;
+  }
+  50% {
+    scale: 1.2;
+  }
+  100% {
+    scale: 1;
+  }
 }
 
 .left-container {
